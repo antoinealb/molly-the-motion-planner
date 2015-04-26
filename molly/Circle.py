@@ -170,6 +170,17 @@ class Circle(object):
         "complement of equals"
         return not self == other
 
+    def __hash__(self):
+        """
+        In python 3 it is not accepted to redefine __eq__ in a way that
+        a == b does not imply hash(a) == hash(b).
+        This is a very bad hash, but satisfies this condition.
+        """
+        h = round(self.pos.pos_x)
+        h += round(self.pos.pos_y)
+        h += round(self.radius)
+        return h
+
     @staticmethod
     def solve_quadratic(param_a, param_b, param_c):
         "solve a*x^2 + b*x + c = 0"

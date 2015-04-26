@@ -279,6 +279,17 @@ class CircleTest(unittest.TestCase):
 
         self.assertTrue(circ.tangent_vector(pos, 1) == Vec2D(0, 1))
 
+    def test_equality_implies_same_hash(self):
+        """
+        Simple test to check that a == b implies hash(a) == hash(b)
+        """
+        a = Circle()
+        b = Circle()
+        a.pos.pos_x += 0.1 * Vec2D.EPSILON
+        a.pos.pos_y += 0.1 * Vec2D.EPSILON
+        a.radius += 0.1 * Vec2D.EPSILON
+        self.assertEqual(a, b)
+        self.assertEqual(hash(a), hash(b))
 
 if __name__ == "__main__":
     unittest.main()
